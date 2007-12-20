@@ -81,5 +81,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/*.la
-%{_libdir}/pkgconfig/*.pc
+/usr/lib/pkgconfig/*.pc
 

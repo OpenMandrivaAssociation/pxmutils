@@ -16,6 +16,7 @@ Source:		lib%{name}-%{version}.tar.bz2
 URL:		http://polyxmass.org/libpxmutils
 License:	GPL
 Group:		Sciences/Chemistry
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	libxml2-devel gettext glib2-devel
 
 %description

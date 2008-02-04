@@ -8,7 +8,7 @@
 %define __libtoolize /bin/true
 
 Name: 	 	%{name}
-Summary: 	A library that's used by the polyxmass framework.
+Summary: 	A library that's used by the polyxmass framework
 Version: 	%{version}
 Release: 	%{release}
 

@@ -1,6 +1,6 @@
 %define name	pxmutils
 %define version	0.7.0
-%define release %mkrel 1
+%define release %mkrel 3
 
 %define major	3
 %define libname %mklibname %name %major

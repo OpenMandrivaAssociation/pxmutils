@@ -16,7 +16,6 @@ Source:		lib%{name}-%{version}.tar.bz2
 URL:		http://polyxmass.org/libpxmutils
 License:	GPL
 Group:		Sciences/Chemistry
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	libxml2-devel gettext glib2-devel
 
 %description
@@ -52,34 +51,13 @@ Libraries and includes files for developing programs based on %name.
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall
-rm -fr $RPM_BUILD_ROOT/%{_docdir}/lib%{name}
+rm -fr %{buildroot}/%{_docdir}/lib%{name}
 
 %find_lang lib%name
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-		
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files -n %{libname} -f lib%{name}.lang
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %{libname}-devel
@@ -89,6 +67,49 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_libdir}/*.so
 %{_libdir}/*.a
-%{_libdir}/*.la
 /usr/lib/pkgconfig/*.pc
 
+
+
+%changelog
+* Tue Sep 08 2009 Thierry Vignaud <tvignaud@mandriva.com> 0.7.0-7mdv2010.0
++ Revision: 433735
+- rebuild
+- rebuild
+
+* Fri Aug 01 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.7.0-4mdv2009.0
++ Revision: 259378
+- rebuild
+
+* Thu Jul 24 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.7.0-3mdv2009.0
++ Revision: 247249
+- rebuild
+- fix summary-ended-with-dot
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Fri Dec 21 2007 Olivier Blin <oblin@mandriva.com> 0.7.0-1mdv2008.1
++ Revision: 136445
+- restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - adjust file list for x86_64
+    - kill re-definition of %%buildroot on Pixel's request
+    - use %%mkrel
+    - import pxmutils
+
+
+* Mon Feb 16 2004 Austin Acton <austin@mandrake.org> 0.7.0-1mdk
+- 0.7.0
+- major 3
+- configure 2.5
+- libtoolize
+
+* Tue Dec 30 2003 Franck Villaume <fvill@freesurf.fr> 0.6.0-2mdk
+- delete pkgconfig BuildRequires
+- add glib2-devel BuildRequires
+
+* Sun Oct 12 2003 Austin Acton <aacton@yorku.ca> 0.6.0-1mdk
+- initial package
